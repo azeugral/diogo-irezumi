@@ -1,0 +1,273 @@
+{
+ "port": [
+  [
+   "028_0",
+   "braco",
+   "Nagasode concluída"
+  ],
+  [
+   "038_0",
+   "braco",
+   "Nagasode cicatrizada"
+  ],
+  [
+   "012_1",
+   "braco",
+   "Duas nagasode em curso"
+  ],
+  [
+   "022_1",
+   "braco",
+   "Nagasode, fundo concluído"
+  ],
+  [
+   "062_0",
+   "braco",
+   "Sleeve de koi"
+  ],
+  [
+   "042_0",
+   "braco",
+   "Hannya e koi"
+  ],
+  [
+   "072_0",
+   "braco",
+   "Ryū, meia manga"
+  ],
+  [
+   "098_2",
+   "braco",
+   "Ryū com ramos de sakura"
+  ],
+  [
+   "100_0",
+   "braco",
+   "Ryū em curso"
+  ],
+  [
+   "070_0",
+   "braco",
+   "Koi a preto e cinza"
+  ],
+  [
+   "065_2",
+   "braco",
+   "Sleeve concluída"
+  ],
+  [
+   "034_2",
+   "braco",
+   "Sleeve em curso"
+  ],
+  [
+   "039_0",
+   "corpo",
+   "Fu dog, costas"
+  ],
+  [
+   "015_0",
+   "corpo",
+   "Dois koi na coxa"
+  ],
+  [
+   "091_1",
+   "corpo",
+   "Hebi e tora no gémeo"
+  ],
+  [
+   "040_2",
+   "corpo",
+   "Ryū freehand na perna"
+  ],
+  [
+   "044_1",
+   "corpo",
+   "Ronin e Namazu"
+  ],
+  [
+   "060_0",
+   "corpo",
+   "Ryū na cabeça"
+  ],
+  [
+   "080_1",
+   "corpo",
+   "Backpiece, primeira sessão de cor"
+  ],
+  [
+   "078_1",
+   "corpo",
+   "Legsleeve em linhas"
+  ],
+  [
+   "007_1",
+   "pecas",
+   "Namakubi"
+  ],
+  [
+   "019_1",
+   "pecas",
+   "Tora"
+  ],
+  [
+   "004_0",
+   "pecas",
+   "Ryū, 5 meses cicatrizado"
+  ],
+  [
+   "023_0",
+   "pecas",
+   "Tengu"
+  ],
+  [
+   "055_0",
+   "pecas",
+   "Hannya freehand"
+  ],
+  [
+   "054_0",
+   "pecas",
+   "Ronin tako"
+  ],
+  [
+   "036_2",
+   "pecas",
+   "Daruma"
+  ],
+  [
+   "041_1",
+   "pecas",
+   "Kaeru"
+  ],
+  [
+   "052_1",
+   "pecas",
+   "Bob, o peixe"
+  ],
+  [
+   "050_2",
+   "pecas",
+   "Crisântemo freehand"
+  ],
+  [
+   "079_2",
+   "pecas",
+   "Oni"
+  ],
+  [
+   "032_0",
+   "pecas",
+   "Hebi com crisântemos"
+  ]
+ ],
+ "hero": [
+  [
+   "077_3",
+   "Daruma"
+  ],
+  [
+   "077_4",
+   "Bakeneko"
+  ],
+  [
+   "083_1",
+   "Gama"
+  ],
+  [
+   "083_2",
+   "Dokuro"
+  ],
+  [
+   "077_2",
+   "Koi e Ryū"
+  ]
+ ],
+ "disp": [
+  "077_3",
+  "077_4",
+  "083_1",
+  "083_2",
+  "077_2",
+  "083_3",
+  "077_1",
+  "095_2",
+  "095_3",
+  "095_4",
+  "104_4",
+  "107_2"
+ ],
+ "proj": [
+  "002_0",
+  "105_0",
+  "110_0",
+  "113_0"
+ ],
+ "poke": [
+  [
+   "117_0",
+   "089",
+   "Muk"
+  ],
+  [
+   "116_1",
+   "076",
+   "Golem"
+  ],
+  [
+   "102_2",
+   "057",
+   "Primeape"
+  ],
+  [
+   "101_1",
+   "068",
+   "Machamp"
+  ],
+  [
+   "099_2",
+   "094",
+   "Gengar"
+  ],
+  [
+   "097_1",
+   "007",
+   "Squirtle"
+  ],
+  [
+   "090_2",
+   "059",
+   "Arcanine"
+  ],
+  [
+   "089_2",
+   "009",
+   "Blastoise"
+  ],
+  [
+   "088_2",
+   "001",
+   "Bulbasaur"
+  ],
+  [
+   "082_2",
+   "054",
+   "Psyduck"
+  ],
+  [
+   "069_1",
+   "093",
+   "Haunter"
+  ],
+  [
+   "066_1",
+   "151",
+   "Mew"
+  ],
+  [
+   "016_1",
+   "004",
+   "Charmander"
+  ]
+ ]
+}
