@@ -152,19 +152,25 @@ function valida(){
   if(!$('#fIdeia').value.trim()&&!escolha){erro.textContent='Conta a tua ideia ou escolhe um flash disponível.';erro.hidden=false;$('#fIdeia').focus();return false}
   erro.hidden=true;return true;
 }
+/* Copia na hora do toque, ainda com a página em foco: abrir o Direct antes fazia o navegador travar a cópia
+   (pedido de permissão em segundo plano) e a aba nova ficava em branco. */
+var DM='https://www.instagram.com/m/diogo_irezumi/';
+function falso(t){var ta=doc.createElement('textarea');ta.value=t;ta.setAttribute('readonly','');ta.style.cssText='position:fixed;top:0;left:0;opacity:0;font-size:16px';doc.body.appendChild(ta);
+  ta.focus({preventScroll:true});ta.select();try{ta.setSelectionRange(0,t.length)}catch(e){}
+  var ok=false;try{ok=doc.execCommand('copy')}catch(e){}ta.remove();return ok}
 function copia(t){
-  if(navigator.clipboard&&window.isSecureContext)return navigator.clipboard.writeText(t).then(function(){return true},function(){return falso(t)});
-  return Promise.resolve(falso(t));
+  var ok=falso(t);
+  try{if(navigator.clipboard&&window.isSecureContext&&doc.hasFocus())navigator.clipboard.writeText(t).catch(function(){})}catch(e){}
+  return ok;
 }
-function falso(t){var ta=doc.createElement('textarea');ta.value=t;ta.setAttribute('readonly','');ta.style.position='fixed';ta.style.opacity='0';doc.body.appendChild(ta);ta.select();var ok=false;try{ok=doc.execCommand('copy')}catch(e){}ta.remove();return ok}
 form.addEventListener('submit',function(e){e.preventDefault();if(!valida())return;
-  var w=window.open('about:blank','_blank');
-  copia(mensagem()).then(function(ok){
-    nota.textContent=ok?'Mensagem copiada. No Direct, cola e envia.':'Não deu para copiar sozinho. Copia o texto do pedido à mão.';
-    if(w){w.location.href='https://ig.me/m/diogo_irezumi'}else{location.href='https://ig.me/m/diogo_irezumi'}
-  });
+  var ok=copia(mensagem());
+  nota.textContent=ok?'Mensagem copiada. No Direct, cola e envia.':'Abrimos o Direct. Se a mensagem não colar, usa "Só copiar a mensagem".';
+  var w=null;try{w=window.open(DM,'_blank');if(w)w.opener=null}catch(e){}
+  if(!w)setTimeout(function(){location.href=DM},350);
 });
-$('#fCopiar').addEventListener('click',function(){if(!valida())return;copia(mensagem()).then(function(ok){nota.textContent=ok?'Mensagem copiada. Agora é só colar no Direct do @diogo_irezumi.':'Não deu para copiar sozinho. Tenta outra vez.'})});
+$('#fCopiar').addEventListener('click',function(){if(!valida())return;var ok=copia(mensagem());
+  nota.textContent=ok?'Mensagem copiada. Agora é só colar no Direct do @diogo_irezumi.':'Não deu para copiar sozinho. Tenta outra vez.'});
 
 /* ---------- entradas ao rolar ---------- */
 var barra=$('#pokeBarra');
