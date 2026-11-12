@@ -10,8 +10,10 @@ with sync_playwright() as p:
     b = p.chromium.launch(channel='msedge')
     c = b.new_context(viewport={'width': 1440, 'height': 900}); c.grant_permissions(['clipboard-read', 'clipboard-write'])
     g = c.new_page(); err = []
-    g.on('pageerror', lambda e: err.append(str(e))); g.goto(URL); g.wait_for_timeout(1600)
-    ok('hero desenrolado', g.evaluate("getComputedStyle(document.querySelector('.kk-pano')).clipPath").startswith('inset(0px'), g.evaluate("getComputedStyle(document.querySelector('.kk-pano')).clipPath"))
+    g.on('pageerror', lambda e: err.append(str(e))); g.goto(URL); g.wait_for_timeout(2200)
+    hz = g.evaluate("(()=>{const m=new DOMMatrix(getComputedStyle(document.querySelector('.kk-mask')).transform),p=new DOMMatrix(getComputedStyle(document.querySelector('.kk-pano')).transform);return [m.m42,p.m42]})()")
+    ok('hero desenrolado', abs(hz[0]) < 1 and abs(hz[1]) < 1, hz)
+    ok('sem clip-path animado', g.evaluate("getComputedStyle(document.querySelector('.kk-pano')).clipPath") == 'none')
     n = lambda: g.evaluate("document.querySelectorAll('#grade li').length")
     ok('grade inicial 16', n() == 16, n())
     g.click('#mais'); ok('ver mais 32', n() == 32, n())

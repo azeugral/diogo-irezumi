@@ -16,7 +16,7 @@ JS = r"""
   if (document.documentElement.scrollWidth > W) out.push('ESTOURO pagina ' + document.documentElement.scrollWidth + '>' + W);
   const sel = 'h1,h2,h3,p,a,button,span,small,q,b,label,summary,address,blockquote,cite,li,option';
   document.querySelectorAll(sel).forEach(el => {
-    if (el.closest('.faixa,[hidden],.sr,.saltar')) return;
+    if (el.closest('.faixa,[hidden],.sr,.saltar,.orn')) return;
     const cs = getComputedStyle(el); if (cs.display === 'none' || cs.visibility === 'hidden') return;
     const r = el.getBoundingClientRect(); if (!r.width || !r.height) return;
     const nome = el.tagName + '.' + el.className + ' "' + (el.textContent || '').trim().slice(0, 28) + '"';

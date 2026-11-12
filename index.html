@@ -17,7 +17,8 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600&family=Zen+Old+Mincho:wght@500;700;900&display=swap" rel="stylesheet">
 <link rel="preload" href="assets/img/hero/077_3.webp" as="image">
-<link rel="stylesheet" href="assets/css/site.css?v=4">
+<link rel="preload" href="assets/img/orn-ryu.svg" as="image" type="image/svg+xml">
+<link rel="stylesheet" href="assets/css/site.css?v=6">
 </head>
 <body>
 <a class="saltar" href="#conteudo">Saltar para o conteúdo</a>
@@ -54,20 +55,25 @@
 <main id="conteudo">
 
 <section class="hero" id="inicio">
+  <span class="orn orn-e" aria-hidden="true"></span><span class="orn orn-d" aria-hidden="true"></span>
   <h1 class="nome">
     <span class="nome-a"><span class="kanji" lang="ja" aria-hidden="true">刺青</span>Diogo</span>
     <span class="nome-b">Teixeira<span class="kanji" lang="ja" aria-hidden="true">彫師</span></span>
   </h1>
   <p class="lado lado-e"><b>Tatuagem japonesa</b><span>Irezumi e freehand</span><span>A cores ou preto e cinza</span></p>
   <figure class="kake" id="kake" aria-label="Pergaminho com os flashes disponíveis do Diogo, que se desenrola e troca de desenho">
-    <span class="kk-fio" aria-hidden="true"></span>
-    <span class="kk-hasso" aria-hidden="true"></span>
-    <div class="kk-pano">
-      <div class="kk-ten" aria-hidden="true"><i class="futai"></i><i class="futai"></i></div>
-      <div class="kk-ichi" aria-hidden="true"></div>
-      <div class="kk-obra"><img id="kkImg" src="assets/img/hero/077_3.webp" alt="Flash Daruma tora" width="900" height="1200" decoding="async" fetchpriority="high"></div>
-      <div class="kk-ichi" aria-hidden="true"></div>
-      <div class="kk-chi" aria-hidden="true"></div>
+    <span class="kk-prego" aria-hidden="true"></span>
+    <svg class="kk-fio" viewBox="0 0 200 50" preserveAspectRatio="none" aria-hidden="true"><path d="M100 3 L7 47 M100 3 L193 47" fill="none" stroke="#a8977f" stroke-width="1.7" stroke-linecap="round" vector-effect="non-scaling-stroke" shape-rendering="geometricPrecision"/></svg>
+    <span class="kk-hasso" aria-hidden="true"><i></i><i></i></span>
+    <span class="kk-sombra" aria-hidden="true"></span>
+    <div class="kk-mask">
+      <div class="kk-pano">
+        <div class="kk-ten" aria-hidden="true"><i class="futai"></i><i class="futai"></i></div>
+        <div class="kk-ichi" aria-hidden="true"></div>
+        <div class="kk-obra"><img id="kkImg" src="assets/img/hero/077_3.webp" alt="Flash Daruma tora" width="900" height="1200" decoding="async" fetchpriority="high"></div>
+        <div class="kk-ichi" aria-hidden="true"></div>
+        <div class="kk-chi" aria-hidden="true"></div>
+      </div>
     </div>
     <span class="kk-jiku" aria-hidden="true"></span>
   </figure>
@@ -177,6 +183,7 @@
 </section>
 
 <section class="sec shu" id="marcar">
+  <span class="orn orn-e" aria-hidden="true"></span><span class="orn orn-d" aria-hidden="true"></span>
   <div class="cab rev">
     <span class="jp" lang="ja" aria-hidden="true">予約</span>
     <h2>Pedir marcação</h2>
@@ -253,6 +260,6 @@
 </div>
 
 <script src="assets/js/dados.js?v=1"></script>
-<script src="assets/js/site.js?v=4"></script>
+<script src="assets/js/site.js?v=6"></script>
 </body>
 </html>

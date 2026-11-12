@@ -13,52 +13,58 @@ menuBt.addEventListener('click',function(){var a=menu.hidden;menu.hidden=!a;menu
 $$('#menu a').forEach(function(a){a.addEventListener('click',fechaMenu)});
 addEventListener('resize',function(){if(innerWidth>960&&!menu.hidden)fechaMenu()});
 
-/* ---------- kakejiku ---------- */
-var hero=$('.hero'), kake=$('#kake'), pano=$('.kk-pano',kake), jiku=$('.kk-jiku',kake), kImg=$('#kkImg'), kNome=$('#kkNome');
+/* ---------- kakejiku ----------
+   Tudo em transform (compositor): a máscara desce, o pano sobe na mesma medida,
+   o rolo acompanha a borda e a sombra cresce junto. Nada de clip-path animado. */
+var hero=$('.hero'), kake=$('#kake'), mask=$('.kk-mask',kake), pano=$('.kk-pano',kake), jiku=$('.kk-jiku',kake), sombra=$('.kk-sombra',kake), kImg=$('#kkImg'), kNome=$('#kkNome');
 var obras=D.hero, idx=0, cache={};
-obras.forEach(function(o){var i=new Image();i.src=IMG+'hero/'+o.c+'.webp';cache[o.c]=i});
-function alturaPano(){return pano.offsetHeight}
-var EASE_D='cubic-bezier(.5,.02,.18,1)', EASE_U='cubic-bezier(.6,0,.4,1)';
-function desenrola(d,atraso){
-  var H=alturaPano();
-  var a=pano.animate([{clipPath:'inset(0 0 100% 0)'},{clipPath:'inset(0 0 0% 0)'}],{duration:d,delay:atraso||0,easing:EASE_D,fill:'both'});
-  jiku.animate([{transform:'translateY('+(-H+6)+'px)'},{transform:'translateY(0)'}],{duration:d,delay:atraso||0,easing:EASE_D,fill:'both'});
-  return a.finished;
+obras.forEach(function(o){var i=new Image();i.decoding='async';i.src=IMG+'hero/'+o.c+'.webp';cache[o.c]=i});
+var H=0;
+function mede(){H=pano.offsetHeight}
+function estado(p){ /* 0 = enrolado, 1 = aberto */
+  var d=(1-p)*H;
+  return {m:'translate3d(0,'+(-d)+'px,0)',p:'translate3d(0,'+d+'px,0)',j:'translate3d(0,'+(-d+(p<1?2:0))+'px,0)',s:'scaleY('+Math.max(p,.001)+')'};
 }
-function enrola(d){
-  var H=alturaPano();
-  var a=pano.animate([{clipPath:'inset(0 0 0% 0)'},{clipPath:'inset(0 0 100% 0)'}],{duration:d,easing:EASE_U,fill:'both'});
-  jiku.animate([{transform:'translateY(0)'},{transform:'translateY('+(-H+6)+'px)'}],{duration:d,easing:EASE_U,fill:'both'});
-  return a.finished;
+function pinta(p){var e=estado(p);mask.style.transform=e.m;pano.style.transform=e.p;jiku.style.transform=e.j;sombra.style.transform=e.s;sombra.style.opacity=p}
+var ANIM=[];
+function move(de,ate,dur,ease,atraso){
+  ANIM.forEach(function(a){a.cancel()});
+  var A=estado(de), B=estado(ate), o={duration:dur,delay:atraso||0,easing:ease,fill:'both'};
+  ANIM=[mask.animate([{transform:A.m},{transform:B.m}],o),pano.animate([{transform:A.p},{transform:B.p}],o),
+        jiku.animate([{transform:A.j},{transform:B.j}],o),sombra.animate([{transform:A.s,opacity:de},{transform:B.s,opacity:ate}],o)];
+  return ANIM[0].finished.then(function(){pinta(ate);ANIM.forEach(function(a){a.cancel()});ANIM=[]});
 }
+var ABRE='cubic-bezier(.33,.04,.12,1)', FECHA='cubic-bezier(.55,0,.35,1)';
 function balanca(){
   if(reduz)return;
-  kake.animate([{transform:'rotate(0)'},{transform:'rotate(.55deg)'},{transform:'rotate(-.35deg)'},{transform:'rotate(.18deg)'},{transform:'rotate(-.06deg)'},{transform:'rotate(0)'}],{duration:1900,easing:'ease-out'});
+  kake.animate([{transform:'rotate(0deg)'},{transform:'rotate(.32deg)',offset:.22},{transform:'rotate(-.2deg)',offset:.5},{transform:'rotate(.08deg)',offset:.76},{transform:'rotate(0deg)'}],{duration:2200,easing:'cubic-bezier(.37,0,.63,1)'});
 }
 function espera(ms){return new Promise(function(r){setTimeout(r,ms)})}
 function troca(){
   idx=(idx+1)%obras.length; var o=obras[idx], im=cache[o.c];
   var pronto=im.decode?im.decode().catch(function(){}):Promise.resolve();
-  return pronto.then(function(){kImg.src=im.src;kImg.alt='Flash '+o.t;kNome.textContent=o.t});
+  return pronto.then(function(){kImg.src=im.src;kImg.alt='Flash '+o.t;kNome.textContent=o.t;return kImg.decode?kImg.decode().catch(function(){}):0});
 }
 var visivel=true;
 if('IntersectionObserver' in window){new IntersectionObserver(function(e){visivel=e[0].isIntersecting},{threshold:.05}).observe(kake)}
 function ciclo(){
-  return espera(3300).then(function(){
-    if(!visivel||doc.hidden){return espera(600).then(ciclo)}
+  return espera(3200).then(function(){
+    if(!visivel||doc.hidden){return espera(500).then(ciclo)}
     kNome.style.opacity=0;
-    return enrola(620).then(function(){return troca()}).then(function(){return espera(120)}).then(function(){
-      kNome.style.opacity=1; balanca(); return desenrola(1000);
+    return move(1,0,760,FECHA).then(troca).then(function(){return espera(140)}).then(function(){
+      kNome.style.opacity=1; setTimeout(balanca,620); return move(0,1,1250,ABRE);
     }).then(ciclo);
   });
 }
 function iniciaHero(){
   hero.classList.add('in');
-  if(reduz||!pano.animate){return}
-  desenrola(1000,180).then(ciclo);
-  setTimeout(balanca,180);
+  if(reduz||!mask.animate){pinta(1);return}
+  move(0,1,1250,ABRE,120).then(ciclo);
+  setTimeout(balanca,760);
 }
-if(pano.animate&&!reduz){pano.style.clipPath='inset(0 0 100% 0)';jiku.style.transform='translateY('+(-alturaPano()+6)+'px)'}
+mede();
+if(!reduz&&mask.animate)pinta(0);
+addEventListener('resize',function(){var h0=H;mede();if(H!==h0&&!ANIM.length)pinta(parseFloat(sombra.style.opacity)||1)});
 var p0=kImg.decode?kImg.decode().catch(function(){}):Promise.resolve();
 Promise.race([p0,espera(1200)]).then(iniciaHero);
 
