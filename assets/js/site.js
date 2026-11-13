@@ -124,53 +124,11 @@ var tx=null;lbImg.addEventListener('touchstart',function(e){tx=e.touches[0].clie
 lbImg.addEventListener('touchend',function(e){if(tx===null)return;var dx=e.changedTouches[0].clientX-tx;if(Math.abs(dx)>50)passa(dx<0?1:-1);tx=null});
 lbQ.addEventListener('click',function(){fecha()});
 
-/* ---------- formulário ---------- */
-var form=$('#form'), escW=$('#fEscolhaW'), esc=$('#fEscolha'), escImg=$('#fEscolhaImg'), erro=$('#fErro'), nota=$('#fNota'), escolha=null;
-function chips(id,multi){var g=$(id);$$('button',g).forEach(function(b){b.addEventListener('click',function(){
-  var on=b.getAttribute('aria-pressed')!=='true';if(!multi)$$('button',g).forEach(function(x){x.setAttribute('aria-pressed','false')});b.setAttribute('aria-pressed',String(on))})})}
-chips('#fTipo');chips('#fAcab');
-function valChip(id){var b=$(id+' [aria-pressed=true]');return b?b.textContent:''}
-function marcaTipo(t){$$('#fTipo button').forEach(function(b){b.setAttribute('aria-pressed',String(b.textContent===t))})}
-doc.addEventListener('click',function(e){var a=e.target.closest('[data-quero],[data-tipo]');if(!a||a.closest('#fTipo'))return;
-  if(a.dataset.tipo)marcaTipo(a.dataset.tipo);
-  if(a.dataset.quero){escolha=a.dataset.nome;esc.textContent=a.dataset.nome;escImg.src=IMG+'disp/'+a.dataset.quero+'.webp';escImg.alt=a.dataset.nome;escW.hidden=false}
-});
-$('#fEscolhaX').addEventListener('click',function(){escolha=null;escW.hidden=true});
-function mensagem(){
-  var v=function(id){return $(id).value.trim()}, l=['Olá Diogo! Sou '+(v('#fNome')||'—')+'.'];
-  var tipo=valChip('#fTipo'); if(tipo)l.push('Procuro: '+tipo);
-  if(escolha)l.push('Desenho: '+escolha);
-  if(v('#fZona'))l.push('Zona do corpo: '+v('#fZona'));
-  if(v('#fTam'))l.push('Tamanho: '+v('#fTam'));
-  var ac=valChip('#fAcab'); if(ac)l.push('Acabamento: '+ac);
-  if(v('#fPrim'))l.push('Primeira tatuagem: '+v('#fPrim'));
-  if(v('#fIdeia'))l.push('','Ideia: '+v('#fIdeia'));
-  return l.join('\n');
-}
-function valida(){
-  if(!$('#fNome').value.trim()){erro.textContent='Escreve o teu nome.';erro.hidden=false;$('#fNome').focus();return false}
-  if(!$('#fIdeia').value.trim()&&!escolha){erro.textContent='Conta a tua ideia ou escolhe um flash disponível.';erro.hidden=false;$('#fIdeia').focus();return false}
-  erro.hidden=true;return true;
-}
-/* Copia na hora do toque, ainda com a página em foco: abrir o Direct antes fazia o navegador travar a cópia
-   (pedido de permissão em segundo plano) e a aba nova ficava em branco. */
-var DM='https://www.instagram.com/m/diogo_irezumi/';
-function falso(t){var ta=doc.createElement('textarea');ta.value=t;ta.setAttribute('readonly','');ta.style.cssText='position:fixed;top:0;left:0;opacity:0;font-size:16px';doc.body.appendChild(ta);
-  ta.focus({preventScroll:true});ta.select();try{ta.setSelectionRange(0,t.length)}catch(e){}
-  var ok=false;try{ok=doc.execCommand('copy')}catch(e){}ta.remove();return ok}
-function copia(t){
-  var ok=falso(t);
-  try{if(navigator.clipboard&&window.isSecureContext&&doc.hasFocus())navigator.clipboard.writeText(t).catch(function(){})}catch(e){}
-  return ok;
-}
-form.addEventListener('submit',function(e){e.preventDefault();if(!valida())return;
-  var ok=copia(mensagem());
-  nota.textContent=ok?'Mensagem copiada. No Direct, cola e envia.':'Abrimos o Direct. Se a mensagem não colar, usa "Só copiar a mensagem".';
-  var w=null;try{w=window.open(DM,'_blank');if(w)w.opener=null}catch(e){}
-  if(!w)setTimeout(function(){location.href=DM},350);
-});
-$('#fCopiar').addEventListener('click',function(){if(!valida())return;var ok=copia(mensagem());
-  nota.textContent=ok?'Mensagem copiada. Agora é só colar no Direct do @diogo_irezumi.':'Não deu para copiar sozinho. Tenta outra vez.'});
+/* ---------- marcação: só o Direct; "Quero este" mostra o flash escolhido acima do botão ---------- */
+var escW=$('#escolhido'), escNome=$('#escNome'), escImg=$('#escImg');
+doc.addEventListener('click',function(e){var a=e.target.closest('[data-quero]');if(!a)return;
+  escNome.textContent=a.dataset.nome;escImg.src=IMG+'disp/'+a.dataset.quero+'.webp';escImg.alt=a.dataset.nome;escW.hidden=false});
+$('#escX').addEventListener('click',function(){escW.hidden=true});
 
 /* ---------- entradas ao rolar ---------- */
 var barra=$('#pokeBarra');

@@ -18,7 +18,7 @@
 <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600&family=Zen+Old+Mincho:wght@500;700;900&display=swap" rel="stylesheet">
 <link rel="preload" href="assets/img/hero/077_3.webp" as="image">
 <link rel="preload" href="assets/img/orn-ryu.svg" as="image" type="image/svg+xml" crossorigin>
-<link rel="stylesheet" href="assets/css/site.css?v=6">
+<link rel="stylesheet" href="assets/css/site.css?v=7">
 </head>
 <body>
 <a class="saltar" href="#conteudo">Saltar para o conteúdo</a>
@@ -169,48 +169,32 @@
   </div>
 </section>
 
-<section class="sec papel" id="como">
-  <div class="cab rev">
-    <span class="jp" lang="ja" aria-hidden="true">手順</span>
-    <h2>Como funciona</h2>
-  </div>
-  <ol class="passos">
-    <li class="passo rev"><span class="passo-n" lang="ja" aria-hidden="true">一</span><h3>Ideia</h3><p>Envia por DM a ideia, o local e o tamanho. Ou escolhe um flash disponível.</p></li>
-    <li class="passo rev"><span class="passo-n" lang="ja" aria-hidden="true">二</span><h3>Desenho</h3><p>Desenho o projeto para ti. Nas peças grandes, à mão livre no próprio corpo.</p></li>
-    <li class="passo rev"><span class="passo-n" lang="ja" aria-hidden="true">三</span><h3>Sessão</h3><p>Na Black Tiger, em Loures. Mangas e costas fazem-se por sessões.</p></li>
-    <li class="passo rev"><span class="passo-n" lang="ja" aria-hidden="true">四</span><h3>Cuidados</h3><p>Hidratar e proteger do sol. Se for preciso retocar, voltamos a ver.</p></li>
-  </ol>
-</section>
-
 <section class="sec shu" id="marcar">
   <span class="orn orn-e" aria-hidden="true"></span><span class="orn orn-d" aria-hidden="true"></span>
   <div class="cab rev">
     <span class="jp" lang="ja" aria-hidden="true">予約</span>
     <h2>Pedir marcação</h2>
-    <p>Preenche o básico. A mensagem fica pronta e abre o Direct do Diogo: é só colar e enviar.</p>
+    <p>As marcações são feitas pelo Direct. O Diogo responde com o desenho, o orçamento e a data.</p>
   </div>
-  <form class="form rev" id="form" novalidate>
-    <div class="campos">
-      <div class="campo"><label for="fNome">O teu nome</label><input id="fNome" name="nome" autocomplete="name" required></div>
-      <div class="campo"><label for="fZona">Zona do corpo</label>
-        <select id="fZona" name="zona"><option value="">Ainda não sei</option><option>Braço</option><option>Antebraço</option><option>Ombro e peito</option><option>Costas</option><option>Coxa</option><option>Perna e gémeo</option><option>Mão</option><option>Outro sítio</option></select></div>
-      <div class="campo lg"><span class="nome-campo" id="lbTipo">O que procuras</span>
-        <div class="chips" role="group" aria-labelledby="lbTipo" id="fTipo"><button type="button" aria-pressed="false">Flash disponível</button><button type="button" aria-pressed="false">Projeto à medida</button><button type="button" aria-pressed="false">Freehand</button><button type="button" aria-pressed="false">Cobertura ou reconstrução</button><button type="button" aria-pressed="false">Pokédex</button></div></div>
-      <div class="campo lg escolha" id="fEscolhaW" hidden><span class="nome-campo">Desenho escolhido</span>
-        <div class="escolha-c"><img id="fEscolhaImg" alt="" width="72" height="96"><b id="fEscolha"></b><button type="button" id="fEscolhaX" aria-label="Tirar o desenho escolhido">Tirar</button></div></div>
-      <div class="campo lg"><label for="fIdeia">A tua ideia</label><textarea id="fIdeia" name="ideia" required placeholder="O que gostavas de tatuar, referências, se é uma cobertura..."></textarea></div>
-      <div class="campo"><label for="fTam">Tamanho aproximado</label><input id="fTam" name="tam" placeholder="Ex.: 15 cm ou manga inteira"></div>
-      <div class="campo"><label for="fPrim">Primeira tatuagem?</label><select id="fPrim" name="prim"><option value="">Prefiro não dizer</option><option>Sim, é a primeira</option><option>Não, já tenho outras</option></select></div>
-      <div class="campo lg"><span class="nome-campo" id="lbAcab">Acabamento</span>
-        <div class="chips" role="group" aria-labelledby="lbAcab" id="fAcab"><button type="button" aria-pressed="false">A cores</button><button type="button" aria-pressed="false">Preto e cinza</button><button type="button" aria-pressed="false">Ainda não sei</button></div></div>
+  <div class="painel rev">
+    <ol class="passos">
+    <li class="passo rev"><span class="passo-n" lang="ja" aria-hidden="true">一</span><h3>Ideia</h3><p>Manda uma DM com a ideia, o local e o tamanho. Ou escolhe um flash disponível.</p></li>
+    <li class="passo rev"><span class="passo-n" lang="ja" aria-hidden="true">二</span><h3>Desenho</h3><p>Desenho o projeto para ti. Nas peças grandes, à mão livre no próprio corpo.</p></li>
+    <li class="passo rev"><span class="passo-n" lang="ja" aria-hidden="true">三</span><h3>Sessão</h3><p>Na Black Tiger, em Loures. Mangas e costas fazem-se por sessões.</p></li>
+    <li class="passo rev"><span class="passo-n" lang="ja" aria-hidden="true">四</span><h3>Cuidados</h3><p>Hidratar e proteger do sol. Se for preciso retocar, voltamos a ver.</p></li>
+  </ol>
+    <div class="escolhido" id="escolhido" hidden>
+      <img id="escImg" alt="" width="72" height="96">
+      <p><span>Flash escolhido</span><b id="escNome"></b><small>Diz o nome na mensagem.</small></p>
+      <button type="button" id="escX">Tirar</button>
     </div>
-    <p class="erro" id="fErro" role="alert" hidden></p>
-    <div class="form-bts">
-      <button class="bt bt-tinta" type="submit"><svg aria-hidden="true"><use href="#i-dm"/></svg>Copiar e abrir o Direct</button>
-      <button class="bt bt-fio-t" type="button" id="fCopiar">Só copiar a mensagem</button>
+    <div class="levar">
+      <span class="levar-t">Na mensagem, conta:</span>
+      <ul><li>A ideia</li><li>Zona do corpo</li><li>Tamanho</li><li>Referências</li></ul>
     </div>
-    <p class="nota" id="fNota" role="status">Tens fotos de referência ou do local? Envia-as logo a seguir, na mesma conversa.</p>
-  </form>
+    <a class="bt bt-tinta bt-dm" href="https://www.instagram.com/m/diogo_irezumi/" target="_blank" rel="noopener"><svg aria-hidden="true"><use href="#i-dm"/></svg>Enviar DM ao Diogo</a>
+    <p class="nota">Tens fotos de referência ou do local? Envia-as na mesma conversa.</p>
+  </div>
 </section>
 
 <section class="sec laca" id="estudio">
@@ -260,6 +244,6 @@
 </div>
 
 <script src="assets/js/dados.js?v=1"></script>
-<script src="assets/js/site.js?v=8"></script>
+<script src="assets/js/site.js?v=9"></script>
 </body>
 </html>
